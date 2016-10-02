@@ -2,6 +2,8 @@ package com.example.lvkaixue.appmeager.utils;
 
 import android.content.Context;
 
+import com.example.lvkaixue.appmeager.treadfact.ThreadManger;
+
 /**
  * Created by lvkaixue on 2016/7/31.
  */
@@ -13,6 +15,8 @@ public class ThreadUtils {
         return AppBaseApplication.getThread();
     }
     public static void mThreadUI(Runnable task){
-       new Thread(task).start();
+        ThreadManger.newInstanceThreadPool(task);
     }
+
+
 }

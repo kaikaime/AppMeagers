@@ -1,11 +1,18 @@
 package com.example.lvkaixue.appmeager.utils;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Message;
 
 import com.example.lvkaixue.appmeager.listeners.ListenerClass;
 
 import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
+import java.io.File;
 import java.sql.SQLOutput;
 
 /**
@@ -33,20 +40,32 @@ public class BaseCallbackUtil {
             message.what = Constant.netConnSucess;
             handler.handleMessage(message);
         }
-
         @Override
-        public void onError(Throwable throwable, boolean b) {
-
-        }
-
+        public void onError(Throwable throwable, boolean b) {}
         @Override
-        public void onCancelled(CancelledException e) {
-
-        }
-
+        public void onCancelled(CancelledException e) {}
         @Override
-        public void onFinished() {
+        public void onFinished() {}}
 
-        }
+    public static abstract class DownLoadCallback implements Callback.ProgressCallback<File> {
+        @Override
+        public void onWaiting() {}
+        @Override
+        public void onStarted() {}
+        @Override
+        public void onLoading(long total, long current, boolean b) {onDownLoad(total, current, b);}
+        @Override
+        public void onSuccess(File file) {onDownLoadSuccess(file);}
+        @Override
+        public void onError(Throwable throwable, boolean b) {onDownLoadError();}
+        @Override
+        public void onCancelled(CancelledException e) {}
+        @Override
+        public void onFinished() {onDownLoadFinish();}
+
+        protected  void onDownLoadFinish(){};
+        protected abstract void onDownLoad(long total, long current, boolean b);
+        protected abstract void onDownLoadSuccess(File file);
+        protected abstract void onDownLoadError();
     }
 }

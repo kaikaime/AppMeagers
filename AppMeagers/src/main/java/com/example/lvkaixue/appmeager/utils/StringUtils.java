@@ -2,6 +2,7 @@ package com.example.lvkaixue.appmeager.utils;
 
 import com.example.lvkaixue.appmeager.single.SingleUser;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -25,5 +26,10 @@ public class StringUtils {
         Calendar c= Calendar.getInstance();
         c.setTimeInMillis(Long.parseLong(time));
         return new SimpleDateFormat("mm-dd hh:mm").format(c.getTime());
+    }
+
+    //设置apk路劲
+    public static String apkUri(){
+        return new File("sdcard/IndexAppApk").getPath()+".apk";
     }
 }
